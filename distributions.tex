@@ -58,7 +58,7 @@ E(X^2) = e^{-\lambda} \sum_{k=0}^\infty k^2 \frac{\lambda^k}{k!} = e^{-\lambda} 
  
  
  \section{Exponential Distribution}
- The exponential distribution describes the time of first-time occurrence for an event with constant chance to occur in each infinitesimal time interval.
+ The exponential distribution describes waiting times without memory, e.g., radioactive decay or corporate default (with constant default rate).
  
  A random variable is exponentially distributed, $X \sim \textrm{Exp}(\lambda)$, if its density function is
  \begin{equation*}
@@ -73,14 +73,17 @@ E(X^2) = e^{-\lambda} \sum_{k=0}^\infty k^2 \frac{\lambda^k}{k!} = e^{-\lambda} 
  \end{equation} 
  
  \subsection{Memoryless}
- For $s, t \geq 0$, 
+ For $t, \Delta t \geq 0$, 
  \begin{equation*}
- P(X \geq s + t \mid X \geq s) = \frac{e^{-\lambda (s+t)}}{e^{-\lambda s}} = P(X \geq t).
+ P(X \geq t + \Delta t \mid X \geq t) = \frac{e^{-\lambda (t + \Delta t)}}{e^{-\lambda t}} = P(X \geq \Delta t).
+ \end{equation*}
+Equivalently, the exponential hazard function is constant:
+ \begin{equation*}
+ h(t) dt = P(t < X < t + dt \mid X > t) = \frac{e^{-\lambda t} - e^{-\lambda (t+dt)}}{e^{-\lambda t}}  = \lambda dt .
  \end{equation*}
  
  	
  
  
- *constant hasard function*
 
 \end{document}
