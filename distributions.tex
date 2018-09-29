@@ -4,6 +4,7 @@
 \author{Rolf D. Svegstrup}
 
 \usepackage{amsmath}
+\usepackage{amssymb}
 
 \begin{document}
 \maketitle
@@ -30,5 +31,56 @@ E(X) &= np \\
 V(X) &= np(1-p) .
 \end{split}
 \end{equation}
+
+\section{Poisson Distribution}
+A \emph{Poisson random variable}, $X$, is given by ... LOTS OF EXPLANATION HERE.
+\begin{equation}
+P(X = k) = e^{-\lambda} \frac{\lambda^k}{k!}, \quad k \in \mathbb{N}_0
+\end{equation}
+
+\begin{equation}
+\label{Eq: Poisson properties}
+\begin{split}
+E(X) &= \lambda \\
+V(X) &= \lambda
+\end{split}
+\end{equation}
+
+To prove (\ref{Eq: Poisson properties}) note that
+\begin{equation*}
+E(X) = e^{-\lambda} \sum_{k=0}^\infty k \frac{\lambda^k}{k!} = e^{-\lambda} \lambda \sum_{k=1}^\infty \frac{\lambda^{k-1}}{(k-1)!} = \lambda.
+\end{equation*}
+Similarly,
+\begin{equation*}
+E(X^2) = e^{-\lambda} \sum_{k=0}^\infty k^2 \frac{\lambda^k}{k!} = e^{-\lambda} \lambda \sum_{k=1}^\infty ((k-1) + 1) \frac{\lambda^{k-1}}{(k-1)!}
+ = \lambda^2 + \lambda.
+ \end{equation*}
+ 
+ 
+ \section{Exponential Distribution}
+ The exponential distribution describes the time of first-time occurrence for an event with constant chance to occur in each infinitesimal time interval.
+ 
+ A random variable is exponentially distributed, $X \sim \textrm{Exp}(\lambda)$, if its density function is
+ \begin{equation*}
+ f(x;\lambda) = \lambda e^{-\lambda x}, \quad x \geq 0.
+ \end{equation*}
+ Equivalently, $P(X \geq h) = e^{-\lambda h}$. We note that
+ \begin{equation}
+ \begin{split}
+ E(X) &= \frac{1}{\lambda} \\
+ V(X) &= \frac{1}{\lambda^2}
+ \end{split}
+ \end{equation} 
+ 
+ \subsection{Memoryless}
+ For $s, t \geq 0$, 
+ \begin{equation*}
+ P(X \geq s + t \mid X \geq s) = \frac{e^{-\lambda (s+t)}}{e^{-\lambda s}} = P(X \geq t).
+ \end{equation*}
+ 
+ 	
+ 
+ 
+ *constant hasard function*
 
 \end{document}
