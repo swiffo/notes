@@ -33,7 +33,9 @@ V(X) &= np(1-p) .
 \end{equation}
 
 \section{Poisson Distribution}
-A \emph{Poisson random variable}, $X$, is given by ... LOTS OF EXPLANATION HERE.
+A Poisson distribution describes the number of events of a Poisson process in a given timeframe. That is, it describes the number of events in a time interval when each infinitesimal time interval has the same chance of spawning an event. Equivalently it can be described as the number of completions of queued, independent processes where each process waits for the process ahead to finish and again, each infinitesimal time interval has the same chance of completing the process. In the limit it also describes the number of successes for a large number of iid. low-probability Bernoulli variables.
+
+A \emph{Poisson random variable}, $X$, is given by 
 \begin{equation}
 P(X = k) = e^{-\lambda} \frac{\lambda^k}{k!}, \quad k \in \mathbb{N}_0
 \end{equation}
@@ -56,6 +58,17 @@ E(X^2) = e^{-\lambda} \sum_{k=0}^\infty k^2 \frac{\lambda^k}{k!} = e^{-\lambda} 
  = \lambda^2 + \lambda.
  \end{equation*}
  
+ \subsection{Poisson Distribution from Binomial Distribution  in the Limit}
+The Poisson distribution arises in the limit of Binomial distributions with the expected number of successes, $\lambda = pn$, kept fixed. 
+\begin{equation*}
+\begin{split}
+P(X_n = k) &= {n \choose k} \left(\frac{\lambda}{n}\right)^k \left(1 - \frac{\lambda}{n}\right)^{n-k} \\
+&= \frac{n!}{(n-k)! \, n^k} \frac{\lambda^k}{k!} \left(1 - \frac{\lambda}{n}\right)^{n-k} \\
+& \xrightarrow {n \rightarrow \infty} \frac{\lambda}{k!} e^{-\lambda}.
+\end{split}
+\end{equation*}
+This uses the limit, $\textrm{lim}(1-\frac{x}{n})^n = e^x$ (apply logarithm, use l'Hospital).
+
  
  \section{Exponential Distribution}
  The exponential distribution describes waiting times without memory, e.g., radioactive decay or corporate default (with constant default rate).
