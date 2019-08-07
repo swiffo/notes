@@ -1,0 +1,132 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+
+\newcommand{\diff}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{Matrix and Vector Differentiation}
+\author{Rolf D. Svegstrup}
+
+\begin{document}
+\maketitle
+
+\section{Vector Differentiation}
+\begin{definition}
+Let $y = \psi(x) \in \R^m$ where $x$ ranges over $R^n$. Then $\diff{y}{x}$ is an $m \times n$-matrix given by
+
+\begin{equation}
+\diff{y}{x} = 
+\begin{pmatrix} 
+\diff{y_1}{x_1} & \cdots & \diff{y_1}{x_n} \\ 
+\vdots && \vdots \\ 
+\diff{y_n}{x_1} & \cdots & \diff{y_n}{x_m} 
+\end{pmatrix}
+\end{equation}
+The matrix is called the \emph{Jacobian} of the transformation $\psi$.
+\end{definition}
+
+\begin{remark}
+Note that if vectors $z = z(y)$ and $y = y(x)$, then $\diff{z}{x} = \diff{z}{y} \diff{y}{x}$. Also note that $\diff{x}{x} = I$.
+\end{remark}
+
+\begin{notation}
+Throughout this section it will be assumed that $x$ is a vector variable, $y = y(x)$ and $z = y(x)$ are vectors depending on $x$ and that $A$ is a matrix not depending on $x$. Dimensions of $x$, $y$, $z$ and $A$ are such that the equations make sense.
+\end{notation}
+
+\begin{proposition}
+\begin{equation}
+\diff{A y}{x} = A \diff{y}{x}
+\end{equation}
+\end{proposition}
+\begin{proof}
+\begin{equation*}
+\left(\diff{A y}{x}\right)_{ij} = \diff{(\sum_k A_{ik} y_k)}{x_j} = \sum_k A_{ik} \left(\diff{y}{x}\right)_{kj} = \left(A \diff{y}{x}\right)_{ij}.
+\end{equation*}
+\end{proof}
+
+\begin{proposition}
+\begin{equation}
+\diff{y^t A z}{x} = z^t A^t \diff{y}{x} + y^t A \diff{z}{x}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+\begin{equation*}
+\begin{split}
+\left( \diff{y^t A z}{x}\right)_{1j} &= \diff{\sum_{k, l} y_k A_{kl} z_l}{x_j} \\
+	&= \sum_k  \diff{y_k}{x_j} (A z)_k + \sum_l (y^t A)_{1l} \diff{z_l}{x_j} \\
+	&= \sum_k \left(\diff{y}{x}\right)_{kj} (A z)_k + \sum_l (y^t A)_{1l} \left(\diff{z}{x}\right)_{lj} \\
+	&= \left( \left( \left( \diff{y}{x} \right)^t A z \right)^t+ y^t A \diff{z}{x} \right)_{1j}
+\end{split}
+\end{equation*}
+\end{proof}
+
+\begin{corollary}
+Some simple corollaries follow:
+\begin{enumerate}
+\item $\diff{A x}{x} = A$.
+\item $\diff{x^t A x}{x} = x^t(A + A^t)$.
+\item $\diff{x^t x}{x} = 2 x^t$.
+\item $\diff{y^t z}{x} = z^t \diff{y}{x} + y^t \diff{z}{x}$.
+\end{enumerate}
+\end{corollary}
+
+
+\section{Differentiating Matrices by Scalars}
+
+\begin{definition}
+Let $A$ be an $m \times n$ matrix whose elements are functions of the scalar $\alpha$. Then
+\begin{equation}
+\diff{A}{\alpha} = \begin{pmatrix}
+\diff{A_{11}}{\alpha} & \cdots & \diff{A_{1n}}{\alpha} \\
+\vdots & & \vdots \\
+\diff{A_{m1}}{\alpha} & \cdots & \diff{A_{mn}}{\alpha}
+\end{pmatrix}.
+\end{equation}
+\end{definition}
+
+\begin{lemma}
+\begin{equation}
+\diff{AB}{\alpha} = \diff{A}{\alpha} B + A \diff{B}{\alpha}.
+\end{equation}
+\end{lemma}
+
+\begin{proposition}
+Let $A$ be an invertible matrix. Then
+\begin{equation}
+\diff{A^{-1}}{\alpha} = - A^{-1} \diff{A}{\alpha} A^{-1}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+\begin{equation*}
+0 = \diff{A^{-1} A}{\alpha} = \diff{A^{-1}}{\alpha} A + A^{-1} \diff{A}{\alpha}.
+\end{equation*}
+Isolating $\diff{A^{-1}}{\alpha}$ completes the proof.
+\end{proof}
+
+
+\section{Applications}
+\subsection{Linear Regression Coefficients}
+Let there be given $N$ observations $(x_i, y_i)$ where $x_i \in \R^n$ and $y_i \in \R$. Let $y = (y_i) \in \R^N$. Let $X \in \R^{N \times (n+1)}$ be the matrix in which the $i$-th row is $1$ followed by $x_i$ as a row vector. We seek a coefficient vector $\beta \in \R^{n+1}$ such that $\lvert\lvert X \beta - y \rvert\rvert_2$ is minimized.
+
+We find the $\beta$ minimizing the square of the norm using vector differentiation:
+\begin{equation}
+0 = \diff{}{\beta} (X \beta - y)^t (X \beta - y) = 2 (X \beta - y)^t X.
+\end{equation}
+Hence, $\beta^t X^t X = y^t X$. Assuming that $X^t X$ is invertible (columns of X being linearly independent), we find
+\begin{equation}
+\beta = (X^t X)^{-1} X^t y.
+\end{equation}
+
+\end{document}
