@@ -129,4 +129,13 @@ Hence, $\beta^t X^t X = y^t X$. Assuming that $X^t X$ is invertible (columns of 
 \beta = (X^t X)^{-1} X^t y.
 \end{equation}
 
+\subsection{Regularised Linear Regression Coefficients}
+Using $L^2$-regularisation, we seek to minimize $\lvert\vert X \beta - y \rvert\rvert_2^2 + \lambda \lvert\lvert \beta \rvert\rvert_2^2$. 
+\begin{equation*}
+0 = \diff{}{\beta} \left( (X \beta - y)^t (X\beta - y) + \lambda \beta^t \beta \right) = 2 (X \beta - y)^t X + 2 \lambda \beta^t.
+\end{equation*}
+The matrix $(X^X + \lambda I)$ is invertible if $\lambda > 0$ and so we find:
+\begin{equation*}
+\beta = (X^t X + \lambda I)^{-1} X^t y.
+\end{equation*}
 \end{document}
